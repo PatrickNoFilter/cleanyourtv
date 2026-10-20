@@ -53,7 +53,14 @@
     <string name="wallpaper_none">None</string>
     <string name="wallpaper_applied">Wallpaper changed</string>
     <string name="wallpaper_theme_default">Theme default</string>
-    <string name="animations_state">Animations: %1$s</string>
+<string name="theme_label">Theme</string>
+    <string name="theme_state">Theme: %1$s</string>
+    <string name="theme_builtin">Built-in</string>
+    <string name="theme_custom">Custom</string>
+    <string name="theme_applied">Theme applied</string>
+    <string name="theme_reset_title">Reset theme?</string>
+    <string name="theme_reset_message">Remove the pushed theme and go back to the built-in theme?</string>
+    <string name="change_failed">Couldn\u2019t make that change</string>    <string name="animations_state">Animations: %1$s</string>
     <string name="advanced_effects">Advanced effects</string>
     <string name="advanced_effects_state">Advanced effects: %1$s</string>
     <string name="advanced_effects_warning">Adds a lifted tile, icon zoom and smooth colour transitions. May increase memory use; the actual difference depends on your TV.</string>

@@ -103,4 +103,11 @@
     <string name="race_live">%1$s · בשידור חי</string>
     <string name="race_finished">הדגל המשובץ</string>
     <string name="last_opened">נפתח לאחרונה %1$s</string>
+<string name="theme_label">ערכת נושא</string>
+    <string name="theme_state">ערכת נושא: %1$s</string>
+    <string name="theme_builtin">מובנית</string>
+    <string name="theme_custom">מותאמת אישית</string>
+    <string name="theme_applied">ערכת הנושא הוחלה</string>
+    <string name="change_failed">לא ניתן לבצע את השינוי</string>    <string name="theme_reset_title">לאפס את ערכת הנושא?</string>
+    <string name="theme_reset_message">להסיר את ערכת הנושא שנדחפה ולחזור לערכת הנושא המובנית?</string>
 </resources>

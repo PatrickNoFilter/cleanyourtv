@@ -20,6 +20,7 @@ public final class LauncherSettingsActivity extends Activity {
     private final TextView[] columnChoices = new TextView[4];
     private final TextView[] rowChoices = new TextView[4];
     private TextView wallpaperChoice;
+    private TextView themeChoice;
     private TextView animationsChoice;
     private TextView advancedChoice;
     private TextView followThemeChoice;
@@ -71,6 +72,8 @@ public final class LauncherSettingsActivity extends Activity {
         }
         wallpaperChoice = findViewById(R.id.wallpaperChoice);
         wallpaperChoice.setOnClickListener(v -> showWallpaperPicker());
+        themeChoice = findViewById(R.id.themeChoice);
+        themeChoice.setOnClickListener(v -> showThemePicker());
         animationsChoice = findViewById(R.id.animationsChoice);
         animationsChoice.setOnClickListener(v -> {
             animations = !animations;
@@ -158,6 +161,40 @@ public final class LauncherSettingsActivity extends Activity {
                 .show();
     }
 
+    private void showThemePicker() {
+        boolean isCustom = ThemeManager.CUSTOM.equals(ThemeManager.currentTheme(this));
+        String[] labels = isCustom
+                ? new String[]{getString(R.string.theme_builtin), getString(R.string.theme_custom)}
+                : new String[]{getString(R.string.theme_builtin)};
+        // Pre-select the current theme so a single OK never deletes anything.
+        int checked = isCustom ? 1 : 0;
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.theme_label)
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                    dialog.dismiss();
+                    if (which == checked) return; // no change; built-in stays untouched
+                    // Removing the pushed theme: confirm first.
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.theme_reset_title)
+                            .setMessage(R.string.theme_reset_message)
+                            .setPositiveButton(android.R.string.ok, (confirm, w) -> {
+                                if (ThemeManager.resetToBuiltin(this)) {
+                                    setResult(RESULT_OK);
+                                    Toast.makeText(this, R.string.theme_applied,
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(this, R.string.change_failed,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                                refresh();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
     private static int indexOf(List<File> images, String name) {
         if (name == null) return -1;
         for (int i = 0; i < images.size(); i++) {
@@ -165,7 +202,6 @@ public final class LauncherSettingsActivity extends Activity {
         }
         return -1;
     }
-
     private void setAdvanced(boolean enabled) {
         advancedEffects = enabled;
         choices.edit().putBoolean("advanced_effects", enabled).apply();
@@ -191,6 +227,9 @@ public final class LauncherSettingsActivity extends Activity {
                 "none".equals(wallpaperCurrent) ? getString(R.string.wallpaper_none)
                         : wallpaperCurrent != null ? wallpaperCurrent
                         : getString(R.string.wallpaper_theme_default)));
+        themeChoice.setText(getString(R.string.theme_state,
+                getString(ThemeManager.CUSTOM.equals(ThemeManager.currentTheme(this))
+                        ? R.string.theme_custom : R.string.theme_builtin)));
         followThemeChoice.setSelected(!hasOnTvChoices());
     }
 
