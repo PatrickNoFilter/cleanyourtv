@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
     <string name="app_name">Beranda</string>
     <string name="inputs">Input</string>
     <string name="wifi">Wi-Fi</string>
@@ -38,6 +36,8 @@
     <string name="advanced_effects">Efek Lanjut</string>
     <string name="advanced_effects_state">Efek lanjut: %1$s</string>
     <string name="advanced_effects_warning">Menambah tile terangkat, zoom ikon, dan transisi warna yang halus. Dapat menambah penggunaan memori; perbedaan aktual tergantung TV Anda.</string>
+    <string name="stats_label">Statistik sistem</string>
+    <string name="stats_state">Statistik sistem: %1$s</string>
     <string name="follow_theme">Ikuti tema (atur ulang pilihan di TV)</string>
     <string name="follow_theme_hint">Menggunakan tema saat ini atau pengaturan tata letak dan gerakan bawaan. Memasang atau mengatur ulang tema juga menghapus pilihan di TV Anda.</string>
     <string name="tv_settings">Setelan Sistem TV</string>
@@ -99,4 +99,3 @@
     <string name="race_live">%1$s · langsung</string>
     <string name="race_finished">Bendera finis</string>
     <string name="last_opened">Terakhir dibuka %1$s</string>
-</resources>

@@ -22,11 +22,13 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView wallpaperChoice;
     private TextView themeChoice;
     private TextView animationsChoice;
+    private TextView statsChoice;
     private TextView advancedChoice;
     private TextView followThemeChoice;
     private int columns;
     private int rowsBelowDock;
     private boolean animations;
+    private boolean showStats;
     private boolean advancedEffects;
 
     @Override
@@ -38,6 +40,7 @@ public final class LauncherSettingsActivity extends Activity {
         columns = config.columns;
         rowsBelowDock = config.rowsBelowDock;
         animations = config.animations;
+        showStats = config.showStats;
         advancedEffects = config.animations && config.advancedEffects;
 
         int[] ids = {R.id.columns4, R.id.columns5, R.id.columns6, R.id.columns7};
@@ -83,6 +86,13 @@ public final class LauncherSettingsActivity extends Activity {
             setResult(RESULT_OK);
             refresh();
         });
+        statsChoice = findViewById(R.id.statsChoice);
+        statsChoice.setOnClickListener(v -> {
+            showStats = !showStats;
+            choices.edit().putBoolean(Config.SHOW_STATS_KEY, showStats).apply();
+            setResult(RESULT_OK);
+            refresh();
+        });
         advancedChoice = findViewById(R.id.advancedChoice);
         advancedChoice.setOnClickListener(v -> {
             if (advancedEffects) {
@@ -100,11 +110,13 @@ public final class LauncherSettingsActivity extends Activity {
         followThemeChoice.setOnClickListener(v -> {
             if (!hasOnTvChoices()) return;
             choices.edit().remove("columns").remove(Config.ROWS_BELOW_DOCK_KEY).remove("animations")
-                    .remove("advanced_effects").remove(Config.WALLPAPER_CHOICE_KEY).commit();
+                    .remove("advanced_effects").remove(Config.WALLPAPER_CHOICE_KEY)
+                    .remove(Config.SHOW_STATS_KEY).commit();
             Config current = Config.load(this);
             columns = current.columns;
             rowsBelowDock = current.rowsBelowDock;
             animations = current.animations;
+            showStats = current.showStats;
             advancedEffects = current.animations && current.advancedEffects;
             setResult(RESULT_OK);
             refresh();
@@ -218,6 +230,8 @@ public final class LauncherSettingsActivity extends Activity {
         }
         animationsChoice.setText(getString(R.string.animations_state,
                 getString(animations ? R.string.on : R.string.off)));
+        statsChoice.setText(getString(R.string.stats_state,
+                getString(showStats ? R.string.on : R.string.off)));
         advancedChoice.setText(getString(R.string.advanced_effects_state,
                 getString(advancedEffects ? R.string.on : R.string.off)));
         advancedChoice.setEnabled(animations);
@@ -236,7 +250,8 @@ public final class LauncherSettingsActivity extends Activity {
     private boolean hasOnTvChoices() {
         return choices.contains("columns") || choices.contains(Config.ROWS_BELOW_DOCK_KEY)
                 || choices.contains("animations") || choices.contains("advanced_effects")
-                || choices.contains(Config.WALLPAPER_CHOICE_KEY);
+                || choices.contains(Config.WALLPAPER_CHOICE_KEY)
+                || choices.contains(Config.SHOW_STATS_KEY);
     }
 
     private void open(Intent intent) {

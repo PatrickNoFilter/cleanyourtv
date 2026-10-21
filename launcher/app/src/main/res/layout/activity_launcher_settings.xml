@@ -77,6 +77,11 @@
             android:layout_marginTop="28dp" />
 
         <TextView
+            android:id="@+id/statsChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
             android:id="@+id/advancedChoice"
             style="@style/SettingsRow"
             android:layout_marginTop="10dp" />
