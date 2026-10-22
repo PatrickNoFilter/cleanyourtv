@@ -34,6 +34,13 @@
     <string name="wallpaper_none">Tidak ada</string>
     <string name="wallpaper_applied">Wallpaper diubah</string>
     <string name="wallpaper_theme_default">Bawaan tema</string>
+    <string name="theme_label">Tema</string>
+    <string name="theme_state">Tema: %1$s</string>
+    <string name="theme_builtin">Bawaan</string>
+    <string name="theme_custom">Kustom</string>
+    <string name="theme_applied">Tema diterapkan</string>
+    <string name="theme_reset_title">Atur ulang tema?</string>
+    <string name="theme_reset_message">Hapus tema yang dipasang dan kembali ke tema bawaan?</string>
     <string name="animations_state">Animasi: %1$s</string>
     <string name="advanced_effects">Efek Lanjut</string>
     <string name="advanced_effects_state">Efek lanjut: %1$s</string>
