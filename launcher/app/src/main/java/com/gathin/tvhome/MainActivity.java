@@ -1793,7 +1793,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         StringBuilder line = new StringBuilder();
         if (cpu >= 0) line.append(getString(R.string.stats_cpu, cpu));
         long[] mem = memUsedOfTotalMb();
-        if (mem != null) appendStat(line, getString(R.string.stats_memory, mem[0], mem[1]));
+        if (mem != null) appendStat(line, getString(R.string.stats_memory, mem[1] - mem[0]));
         String free = formatGb(getResources(), Environment.getDataDirectory().getFreeSpace());
         if (!free.isEmpty()) appendStat(line, getString(R.string.stats_storage, free));
         return line.toString();
